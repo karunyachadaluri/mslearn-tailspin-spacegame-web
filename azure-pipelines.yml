@@ -6,6 +6,7 @@
 trigger:
 - 'main'
 
+
 pool:
   vmImage: 'ubuntu-20.04'
   demands:
@@ -43,7 +44,13 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
+- template: templates/build.yml
+  parameters:
+    buildConfiguration: 'Debug'
 
+- template: templates/build.yml
+  parameters:
+    buildConfiguration: 'Release'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
